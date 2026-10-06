@@ -6,7 +6,9 @@
 <meta name="theme-color" content="#1f4a1a">
 <title>FLEXConnect Series | Foundation for Leadership Excellence</title>
 <meta name="description" content="A monthly conversation on leadership, hosted by the Foundation for Leadership Excellence. Join the next FLEXConnect session live on Zoom.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%231f4a1a'/><text x='50' y='68' font-size='56' font-family='Arial' font-weight='900' text-anchor='middle' fill='%23b4dc2e'>F</text></svg>">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -204,12 +206,78 @@
   .wip{display:inline-flex;align-items:center;gap:8px;margin-bottom:12px;padding:6px 14px;border-radius:999px;background:#eef3e4;color:var(--forest);font-weight:700;font-size:.85rem}
   .wip::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--lime);border:2px solid var(--forest);animation:glow 2s infinite}
   footer .fnote{width:100%;opacity:.85;font-size:.9rem}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .zoomcard{position:relative;overflow:hidden;display:flex;flex-direction:column;color:var(--white);border-color:transparent;background:linear-gradient(150deg,var(--forest),var(--deep))}
+  .zoomcard::before{content:"";position:absolute;width:240px;height:240px;right:-80px;top:-100px;border-radius:50%;background:var(--lime);filter:blur(60px);opacity:.35;pointer-events:none;animation:floaty 10s ease-in-out infinite}
+  .zoomcard>*{position:relative}
+  .zhead{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+  .zoomcard h3{color:var(--white);margin:0}
+  .zicon{width:46px;height:46px;border-radius:15px;background:var(--lime);color:var(--deep);display:grid;place-items:center;flex:none}
+  .zhint{color:#d7e6c8;font-size:.95rem;margin-bottom:18px}
+  .zoomcard .zhint{color:#d7e6c8}
+  .creds{margin-bottom:22px}
+  .cred{display:flex;align-items:center;justify-content:space-between;gap:12px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.16);border-radius:20px;padding:12px 12px 12px 18px;margin-bottom:12px}
+  .cred .k{display:block;font-size:.8rem;color:#d7e6c8;letter-spacing:.04em;text-transform:uppercase}
+  .cred .v{display:block;font-family:var(--display);font-weight:800;font-size:clamp(1.15rem,5.2vw,1.8rem);line-height:1.2;white-space:nowrap;font-variant-numeric:tabular-nums;user-select:all;-webkit-user-select:all}
+  .copy{flex:none;min-width:88px;min-height:46px;padding:0 18px;border-radius:999px;border:2px solid var(--lime);background:transparent;color:var(--lime);font:700 .95rem var(--body);cursor:pointer;transition:background .2s,color .2s,transform .2s var(--ease)}
+  .copy:active{transform:scale(.95)}
+  .copy.done{background:var(--lime);color:var(--deep)}
+  @media (hover:hover){.copy:hover{background:var(--lime);color:var(--deep)}}
+  .zoomcard .btn.lime{margin-top:auto;background:var(--lime);color:var(--deep);border-color:var(--lime)}
+  @media (hover:hover){.zoomcard .btn.lime:hover{background:#c8ee42;border-color:#c8ee42}}
+  @media (max-width:380px){.cred{padding-left:14px}.copy{min-width:76px;padding:0 14px}}
+  @media (max-width:340px){.cred{flex-wrap:wrap}.copy{width:100%}}
+  /* hero with portraits */
+  .hero-top{display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(20px,4vw,48px);align-items:center}
+  .stage-wrap{width:100%;max-width:520px;justify-self:center}
+  .stage-wrap[hidden]{display:none}
+  .stage{position:relative;aspect-ratio:1/1}
+  .stage .pill{position:absolute;left:0;right:0;bottom:0;height:66%;border-radius:999px;
+    background:radial-gradient(90% 120% at 100% 0%,rgba(180,220,46,.35),transparent 55%),linear-gradient(135deg,var(--forest),var(--deep));
+    box-shadow:0 30px 60px -30px rgba(18,48,15,.65);animation:grow 1s .3s var(--ease) both}
+  .people{position:absolute;inset:0;clip-path:inset(0 0 0 0 round 0 0 33% 33%)}
+  .people .p{position:absolute;bottom:0;height:auto;display:block;animation:peopleUp 1s var(--ease) both;filter:drop-shadow(0 10px 18px rgba(0,0,0,.25))}
+  .people .host{left:2%;width:58%;z-index:2;animation-delay:.75s}
+  .people .guest{right:0;width:51%;z-index:1;animation-delay:.95s}
+  .stage.solo .host{left:20%}
+  @keyframes peopleUp{from{transform:translateY(45%);opacity:0}to{transform:none;opacity:1}}
+  .chips{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+  .chips:has(.chip:only-child){grid-template-columns:1fr}
+  .chip{background:var(--white);border:1px solid var(--line);border-radius:18px;padding:10px 14px;font-weight:700;line-height:1.25;animation:fadeup .8s 1.25s var(--ease) both}
+  .chip[hidden]{display:none}
+  .chip .tag{display:block;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--leaf);margin-bottom:2px}
+  .chip small{display:block;font-weight:500;color:var(--muted);font-size:.82rem;margin-top:2px}
+  @media (min-width:900px){
+    .hero-top.has-stage{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr)}
+    .hero-top.has-stage h1{font-size:clamp(2.9rem,5vw,4.6rem)}
+  }
+  @media (max-width:380px){.chips{grid-template-columns:1fr}}
+  @media (max-width:899px){.stage-wrap{margin-top:-7vw}}
+
+  /* calendar menu */
+  .cal{position:relative}
+  .cal .btn svg{transition:transform .2s}
+  .cal .btn[aria-expanded="true"] svg{transform:rotate(180deg)}
+  .menu{position:absolute;top:calc(100% + 8px);left:0;min-width:280px;background:var(--white);border:1px solid var(--line);border-radius:22px;padding:8px;box-shadow:0 24px 40px -20px rgba(18,48,15,.5);z-index:15;animation:fadeup .2s var(--ease)}
+  .menu[hidden]{display:none}
+  .menu a{display:flex;align-items:center;min-height:48px;padding:10px 16px;border-radius:14px;text-decoration:none;font-weight:600;color:var(--forest)}
+  @media (hover:hover){.menu a:hover{background:var(--paper)}}
+  .menu a:focus-visible{background:var(--paper)}
+  .actions{align-items:flex-start;position:relative;z-index:20}
+  @media (max-width:560px){.cal{width:100%}.cal>.btn{width:100%}.menu{left:0;right:0;min-width:0}}
   .arch-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr));gap:clamp(16px,2.4vw,28px);margin-top:26px;align-items:start}
   .card.arch{padding:0;overflow:hidden}
   .card.arch img{width:100%;display:block;border-bottom:1px solid var(--line)}
   .card.arch .body{padding:clamp(18px,2.4vw,26px)}
   .card.arch .date{color:var(--muted);font-size:.9rem}
   .card.arch h3{margin:4px 0 14px;font-size:1.2rem;line-height:1.2}
+  .acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+  .act{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:9px 16px;border-radius:999px;border:2px solid var(--forest);color:var(--forest);background:transparent;font-weight:700;font-size:.92rem;text-decoration:none;font-family:inherit;transition:background .2s,color .2s,transform .2s var(--ease)}
+  .act svg{width:16px;height:16px;flex:none}
+  a.act:active{transform:scale(.96)}
+  @media (hover:hover){a.act:hover{background:var(--forest);color:var(--white);transform:translateY(-2px)}}
+  .act.off{opacity:.45;border-style:dashed;cursor:not-allowed}
+  .card.arch .tagline{font-style:italic;color:var(--muted);font-size:.95rem;margin:-6px 0 14px}
   .card.arch .who{margin-bottom:0;font-size:.95rem}
   .card.arch .btn{margin-top:20px}
   footer{background:var(--deep);color:#d7e6c8;margin-top:clamp(20px,4vw,40px);padding:34px 0 calc(34px + env(safe-area-inset-bottom));font-size:.95rem}
@@ -277,8 +345,25 @@
 <main>
   <div class="hero">
     <div class="wrap">
-      <h1><span class="line"><span>FLEXConnect</span></span><span class="line"><span>Series</span></span></h1>
-      <p class="lede">One conversation on leadership, every month. Live on Zoom, streamed on Spotify and YouTube, free for anyone to join.</p>
+      <div class="hero-top" id="heroTop">
+        <div class="hero-copy">
+          <h1><span class="line"><span>FLEXConnect</span></span><span class="line"><span>Series</span></span></h1>
+          <p class="lede">One conversation on leadership, every month. Live on Zoom, streamed on Spotify and YouTube, free for anyone to join.</p>
+        </div>
+        <div class="stage-wrap" id="stageWrap" hidden>
+          <div class="stage" id="stage">
+            <div class="pill"></div>
+            <div class="people">
+              <img class="p host" id="hostImg" alt="" onerror="this.remove()">
+              <img class="p guest" id="guestImg" alt="" onerror="this.remove()">
+            </div>
+          </div>
+          <div class="chips">
+            <div class="chip" id="hostChip" hidden></div>
+            <div class="chip" id="guestChip" hidden></div>
+          </div>
+        </div>
+      </div>
 
       <div class="capsule" id="capsule">
         <div class="orb a"></div><div class="orb b"></div>
@@ -303,8 +388,14 @@
 
       <div class="actions">
         <a class="btn solid pulse" id="joinBtn" href="#join">Join on Zoom</a>
-        <a class="btn ghost" id="icsBtn" href="#" download="flexconnect.ics">Add to my calendar</a>
-        <a class="btn ghost" id="gcalBtn" href="#" target="_blank" rel="noopener">Google Calendar</a>
+        <div class="cal" id="cal">
+          <button class="btn ghost" id="calBtn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="calMenu">Add to calendar <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="menu" id="calMenu" role="menu" hidden>
+            <a role="menuitem" id="calGoogle" href="#" target="_blank" rel="noopener">Google Calendar</a>
+            <a role="menuitem" id="calOutlook" href="#" target="_blank" rel="noopener">Outlook</a>
+            <a role="menuitem" id="calIcs" href="#">Apple Calendar (.ics)</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -335,13 +426,24 @@
     <div class="wrap">
       <h2 class="reveal">How to join</h2>
       <div class="join">
-        <div class="card reveal" style="--d:.05s">
-          <h3>Live on Zoom</h3>
-          <dl class="zoom">
-            <dt>Meeting ID</dt><dd>631 118 5589</dd>
-            <dt>Passcode</dt><dd>flex</dd>
-          </dl>
-          <a class="btn solid" id="zoomBtn" href="#" target="_blank" rel="noopener">Open Zoom meeting</a>
+        <div class="card zoomcard reveal" style="--d:.05s">
+          <div class="zhead">
+            <span class="zicon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><rect x="2" y="6" width="13" height="12" rx="3"/><path d="M17 10.5 22 7v10l-5-3.5z"/></svg></span>
+            <h3>Live on Zoom</h3>
+          </div>
+          <p class="zhint">Tap Copy, then paste it into the Zoom app.</p>
+          <div class="creds">
+            <div class="cred">
+              <div><span class="k">Meeting ID</span><span class="v" id="zId"></span></div>
+              <button class="copy" type="button" data-copy="id" aria-label="Copy meeting ID">Copy</button>
+            </div>
+            <div class="cred">
+              <div><span class="k">Passcode</span><span class="v" id="zPass"></span></div>
+              <button class="copy" type="button" data-copy="pass" aria-label="Copy passcode">Copy</button>
+            </div>
+          </div>
+          <a class="btn lime" id="zoomBtn" href="#" target="_blank" rel="noopener">Open Zoom meeting</a>
+          <span class="sr" id="copyMsg" aria-live="polite"></span>
         </div>
         <div class="card reveal" style="--d:.15s">
           <h3>Watch and listen live</h3>
@@ -371,7 +473,7 @@
           <div class="date" id="lastDate"></div>
           <h3 id="lastTopic"></h3>
           <div class="who" id="lastWho"></div>
-          <a class="btn ghost" id="recBtn" href="#join">Watch or listen</a>
+          <div class="acts" id="lastActs"></div>
         </div>
       </div>
     </div>
@@ -410,7 +512,14 @@
    - start: session start in UTC (ISO format, ending in Z)
    - topic / host / speaker: leave "" until announced
      (optional: hostRole, speakerRole, speakerLabel e.g. "Guest")
-   - recording: link to the episode, shown on the archive card
+   - subtitle: optional tagline shown under the topic on archive cards
+   - watch: YouTube link for the episode
+   - listen: Spotify link for the episode
+   - slides: the presentation file, e.g. "presentations/2026-09-06.pdf"
+     (upload it to a "presentations" folder). A Google Drive link works too.
+     Each of the three shows as a button; empty ones appear greyed out.
+   - hostPhoto / speakerPhoto: transparent-background portraits shown
+     in the hero, e.g. "people/creech-jones.webp"
    - flyer: path or link to the month's flyer image, e.g.
      "flyers/oct-2026.jpg" (upload the image next to this file).
      Leave "" to hide it.
@@ -419,6 +528,7 @@
      one under "Last session".
    ============================================================ */
 const CONFIG = {
+  hostPhoto: "people/john-kissi.webp",   // default host portrait (transparent background)
   zoomId: "6311185589",
   zoomPasscode: "flex",
   durationMinutes: 90,
@@ -443,32 +553,48 @@ const CONFIG = {
   },
   sessions: [
     {
+      start: "2025-01-26T19:00:00Z",
+      topic: "Overcoming Limiting Thoughts",
+      subtitle: "How to break barriers and achieve the impossible.",
+      host: "Dr. John Kissi",
+      hostRole: "Chartered Engineer, President of FLEX",
+      speaker: "Sally Bossman (Mrs)",
+      speakerLabel: "Guest",
+      speakerRole: "President, The Relentless Woman",
+      flyer: "flyers/2025-01-26.jpg",
+      watch: "", listen: "", slides: ""
+    },
+    {
       start: "2026-09-06T18:00:00Z",
       topic: "Handling Setbacks Without Losing Direction",
-      host: "John Kissi",
+      host: "Dr. John Kissi",
       hostRole: "Chartered Engineer, President of FLEX",
       speaker: "Clement Kwegyir-Afful",
       speakerLabel: "Guest",
       speakerRole: "Chartered Civil Engineer (CEng FICE), Author and Infrastructure Specialist",
       flyer: "flyers/2026-09-06.jpg",
-      recording: "https://open.spotify.com/episode/4itMLXtiSPreLSTz5GvxgN"
+      watch: "",      // YouTube link
+      listen: "https://open.spotify.com/episode/4itMLXtiSPreLSTz5GvxgN",   // Spotify link
+      slides: ""      // e.g. "presentations/2026-09-06.pdf"
     },
     {
       start: "2026-09-27T18:00:00Z",
       topic: "Making Better Choices With Limited Information",
-      host: "John Kissi",
+      host: "Dr. John Kissi",
       hostRole: "Chartered Engineer, President of FLEX",
       speaker: "Dr. Samuel Appiah",
       speakerRole: "Chartered Civil Engineer, Capital Projects Advisor",
       flyer: "flyers/2026-09-27.jpg",
-      recording: ""        // paste the Spotify/YouTube episode link when ready
+      watch: "", listen: "", slides: ""
     },
     {
-      start: "2026-10-25T18:00:00Z",   // assumed: last Sunday, 6PM GMT
-      topic: "",
-      host: "John Kissi",
+      start: "2026-10-25T18:00:00Z",   // 25 Oct 2026, 6PM GMT (time assumed, confirm)
+      topic: "Preparing for What\u2019s Next Before it Arrives",
+      host: "Dr. John Kissi",
       hostRole: "Chartered Engineer, President of FLEX",
-      speaker: "",
+      speaker: "Mr. Creech Jones",
+      speakerRole: "CEO, Rickair Company Ltd",
+      speakerPhoto: "people/creech-jones.webp",
       flyer: ""
     }
   ]
@@ -490,6 +616,31 @@ const fmtTime = (d, tz) => new Intl.DateTimeFormat('en-GB',{hour:'numeric',minut
 const fmtDay = (d, tz) => new Intl.DateTimeFormat('en-GB',{weekday:'short',day:'numeric',month:'short',timeZone:tz}).format(d);
 const zoomUrl = `https://zoom.us/j/${CONFIG.zoomId}?pwd=${encodeURIComponent(CONFIG.zoomPasscode)}`;
 $('zoomBtn').href = zoomUrl;
+$('zId').textContent = CONFIG.zoomId.replace(/^(\d{3})(\d{3})(\d+)$/, '$1 $2 $3');
+$('zPass').textContent = CONFIG.zoomPasscode;
+
+/* ---- copy buttons ---- */
+async function copyText(text){
+  try{ await navigator.clipboard.writeText(text); return true; }
+  catch(e){
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.setAttribute('readonly',''); ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0';
+    document.body.appendChild(ta); ta.select(); ta.setSelectionRange(0, text.length);
+    let ok = false; try{ ok = document.execCommand('copy'); }catch(_){}
+    ta.remove(); return ok;
+  }
+}
+document.querySelectorAll('.copy').forEach(btn=>{
+  btn.addEventListener('click', async ()=>{
+    const isId = btn.dataset.copy === 'id';
+    const ok = await copyText(isId ? CONFIG.zoomId : CONFIG.zoomPasscode);
+    btn.textContent = ok ? 'Copied' : 'Press and hold to copy';
+    btn.classList.toggle('done', ok);
+    $('copyMsg').textContent = ok ? (isId ? 'Meeting ID copied' : 'Passcode copied') : '';
+    clearTimeout(btn._t);
+    btn._t = setTimeout(()=>{ btn.textContent = 'Copy'; btn.classList.remove('done'); }, 2000);
+  });
+});
 
 /* ---- marquee (duplicated for a seamless loop) ---- */
 const phrase = ['Sharing Knowledge','Inspiring People','FLEXConnect Series','Every month, live'];
@@ -518,13 +669,32 @@ function whoHtml(s){
   return out.join('');
 }
 
+/* ---- watch / listen / presentation buttons ---- */
+const ICONS = {
+  watch:'<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg>',
+  listen:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="14" width="4" height="6" rx="1.5"/><rect x="17" y="14" width="4" height="6" rx="1.5"/></svg>',
+  slides:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 20h14"/></svg>'
+};
+function actsHtml(s){
+  const items = [
+    ['watch','Watch',s.watch,'Watch on YouTube'],
+    ['listen','Listen',s.listen || s.recording,'Listen on Spotify'],
+    ['slides','Presentation',s.slides,'Download the presentation']
+  ];
+  return items.map(([k,label,href,tip])=>{
+    if(!href) return `<span class="act off" aria-disabled="true" title="Coming soon">${ICONS[k]}${label}</span>`;
+    const external = /^https?:/i.test(href);
+    const attrs = (k === 'slides' && !external) ? ' download' : ' target="_blank" rel="noopener"';
+    return `<a class="act" href="${esc(href)}"${attrs} title="${tip}">${ICONS[k]}${label}</a>`;
+  }).join('');
+}
+
 /* ---- last session ---- */
 if(past){
   $('lastDate').textContent = fmtDate(new Date(past.start),'Africa/Accra');
   $('lastTopic').textContent = past.topic || 'Previous session';
   $('lastWho').innerHTML = whoHtml(past);
-  if(past.recording){ $('recBtn').href = past.recording; $('recBtn').target = '_blank'; $('recBtn').rel = 'noopener'; $('recBtn').textContent = 'Watch or listen'; }
-  else { $('recBtn').style.display = 'none'; }
+  $('lastActs').innerHTML = actsHtml(past);
   if(past.flyer){ $('lastImg').src = past.flyer; $('lastImg').alt = 'Flyer for ' + (past.topic || 'the previous session'); }
   else { $('lastImg').closest('figure').hidden = true; }
 } else {
@@ -541,8 +711,8 @@ archived.forEach((s,i)=>{
   el.innerHTML =
     (s.flyer ? `<img loading="lazy" src="${esc(s.flyer)}" alt="Flyer for ${esc(s.topic || 'a previous session')}" onerror="this.remove()">` : '') +
     `<div class="body"><div class="date">${fmtDate(new Date(s.start),'Africa/Accra')}</div>` +
-    `<h3>${esc(s.topic || 'FLEXConnect session')}</h3><div class="who">${whoHtml(s)}</div>` +
-    (s.recording ? `<a class="btn ghost" href="${esc(s.recording)}" target="_blank" rel="noopener">Watch or listen</a>` : '') +
+    `<h3>${esc(s.topic || 'FLEXConnect session')}</h3>` + (s.subtitle ? `<p class="tagline">${esc(s.subtitle)}</p>` : '') + `<div class="who">${whoHtml(s)}</div>` +
+    `<div class="acts">${actsHtml(s)}</div>` +
     `</div>`;
   grid.appendChild(el);
 });
@@ -555,8 +725,7 @@ if(!next){
   $('badge').textContent = 'Our next session';
   $('state').textContent = 'Date coming soon';
   $('topic').textContent = 'Check back shortly. The next FLEXConnect date is being confirmed.';
-  $('icsBtn').style.display = 'none';
-  $('gcalBtn').style.display = 'none';
+  $('cal').style.display = 'none';
   $('times').style.display = 'none';
   $('progress').style.display = 'none';
 } else {
@@ -569,12 +738,25 @@ if(!next){
     : 'Topic and speaker will be announced soon.';
 
   /* this month's block, shown once a topic or flyer is set */
-  if(next.topic || next.flyer){
+  if(next.flyer){
     $('thismonth').hidden = false;
     $('nextDate').textContent = fmtDate(start, tzMine) + ', ' + fmtTime(start, tzMine);
     $('nextTopic').textContent = next.topic || 'Topic to be announced';
     $('nextWho').innerHTML = whoHtml(next);
     if(next.flyer){ $('nextFlyer').src = next.flyer; $('nextFlyerWrap').hidden = false; }
+  }
+
+  /* hero portraits */
+  const hostPhoto = next.hostPhoto || CONFIG.hostPhoto;
+  const guestPhoto = next.speakerPhoto;
+  if(hostPhoto || guestPhoto){
+    $('heroTop').classList.add('has-stage');
+    $('stageWrap').hidden = false;
+    if(hostPhoto){ $('hostImg').src = hostPhoto; $('hostImg').alt = 'Portrait of ' + (next.host || 'the host'); } else { $('hostImg').remove(); }
+    if(guestPhoto){ $('guestImg').src = guestPhoto; $('guestImg').alt = 'Portrait of ' + (next.speaker || 'the speaker'); } else { $('guestImg').remove(); $('stage').classList.add('solo'); }
+    const chip = (id, tag, name, role) => { if(!name) return; const el = $(id); el.innerHTML = `<span class="tag">${esc(tag)}</span>${esc(name)}${role ? `<small>${esc(role)}</small>` : ''}`; el.hidden = false; };
+    chip('hostChip','Host',next.host,next.hostRole);
+    chip('guestChip',next.speakerLabel || 'Speaker',next.speaker,next.speakerRole);
   }
 
   /* countdown, with a small drop animation when a digit changes */
@@ -633,20 +815,79 @@ if(!next){
     wrapZ.appendChild(el);
   });
 
-  /* calendar */
+  /* calendar: Google, Outlook and a standards-compliant .ics file */
   const stamp = d => d.toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'');
+  const isoZ = d => d.toISOString().replace(/\.\d{3}Z$/,'Z');
+  const icsEsc = s => String(s).replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\r?\n/g,'\\n');
+  function fold(line){
+    const enc = new TextEncoder(); let out = '', cur = '', bytes = 0, limit = 75;
+    for(const ch of line){
+      const b = enc.encode(ch).length;
+      if(bytes + b > limit){ out += cur + '\r\n '; cur = ''; bytes = 0; limit = 74; }
+      cur += ch; bytes += b;
+    }
+    return out + cur;
+  }
   const title = 'FLEXConnect Series' + (next.topic ? `: ${next.topic}` : '');
-  const desc = `Join on Zoom: ${zoomUrl}\\nMeeting ID: ${CONFIG.zoomId}\\nPasscode: ${CONFIG.zoomPasscode}`;
-  const ics = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//FLEX//FLEXConnect//EN','BEGIN:VEVENT',
-    `UID:flexconnect-${stamp(start)}@flexglobal.org`,`DTSTAMP:${stamp(new Date())}`,
-    `DTSTART:${stamp(start)}`,`DTEND:${stamp(end)}`,`SUMMARY:${title}`,
-    `DESCRIPTION:${desc}`,`LOCATION:${zoomUrl}`,'END:VEVENT','END:VCALENDAR'].join('\r\n');
-  $('icsBtn').href = URL.createObjectURL(new Blob([ics],{type:'text/calendar'}));
-  $('gcalBtn').href = 'https://calendar.google.com/calendar/render?action=TEMPLATE'
+  const details = [
+    next.speaker ? `Speaker: ${next.speaker}${next.speakerRole ? ', ' + next.speakerRole : ''}` : '',
+    next.host ? `Host: ${next.host}` : '',
+    `Join on Zoom: ${zoomUrl}`,
+    `Meeting ID: ${CONFIG.zoomId}`,
+    `Passcode: ${CONFIG.zoomPasscode}`
+  ].filter(Boolean).join('\n');
+
+  const ics = [
+    'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//FLEX//FLEXConnect Series//EN','CALSCALE:GREGORIAN','METHOD:PUBLISH',
+    'BEGIN:VEVENT',
+    `UID:flexconnect-${stamp(start)}@flexglobal.org`,
+    `DTSTAMP:${stamp(new Date())}`,
+    `DTSTART:${stamp(start)}`,
+    `DTEND:${stamp(end)}`,
+    `SUMMARY:${icsEsc(title)}`,
+    `DESCRIPTION:${icsEsc(details)}`,
+    `LOCATION:${icsEsc(zoomUrl)}`,
+    `URL:${zoomUrl}`,
+    'STATUS:CONFIRMED','TRANSP:OPAQUE',
+    'BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:FLEXConnect starts in 1 hour','TRIGGER:-PT1H','END:VALARM',
+    'BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:FLEXConnect is tomorrow','TRIGGER:-P1D','END:VALARM',
+    'END:VEVENT','END:VCALENDAR'
+  ].map(fold).join('\r\n') + '\r\n';
+
+  $('calGoogle').href = 'https://calendar.google.com/calendar/render?action=TEMPLATE'
     + `&text=${encodeURIComponent(title)}`
     + `&dates=${stamp(start)}/${stamp(end)}`
-    + `&details=${encodeURIComponent(desc.replace(/\\n/g,'\n'))}`
+    + `&details=${encodeURIComponent(details)}`
     + `&location=${encodeURIComponent(zoomUrl)}`;
+  $('calOutlook').href = 'https://outlook.live.com/calendar/0/deeplink/compose?path=%2Fcalendar%2Faction%2Fcompose&rru=addevent'
+    + `&subject=${encodeURIComponent(title)}`
+    + `&startdt=${encodeURIComponent(isoZ(start))}`
+    + `&enddt=${encodeURIComponent(isoZ(end))}`
+    + `&body=${encodeURIComponent(details)}`
+    + `&location=${encodeURIComponent(zoomUrl)}`;
+
+  const calBtn = $('calBtn'), calMenu = $('calMenu');
+  const closeMenu = () => { calMenu.hidden = true; calBtn.setAttribute('aria-expanded','false'); };
+  calBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    const open = calMenu.hidden;
+    calMenu.hidden = !open;
+    calBtn.setAttribute('aria-expanded', String(open));
+    if(open) calMenu.querySelector('a').focus();
+  });
+  document.addEventListener('click', e => { if(!$('cal').contains(e.target)) closeMenu(); });
+  document.addEventListener('keydown', e => { if(e.key === 'Escape'){ closeMenu(); calBtn.focus(); } });
+  calMenu.addEventListener('click', () => setTimeout(closeMenu, 150));
+  $('calIcs').addEventListener('click', e => {
+    e.preventDefault();
+    const isIOS = /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    if(isIOS){ location.href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(ics); return; }
+    const url = URL.createObjectURL(new Blob([ics], {type:'text/calendar;charset=utf-8'}));
+    const a = document.createElement('a');
+    a.href = url; a.download = `flexconnect-${start.toISOString().slice(0,10)}.ics`;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 4000);
+  });
 }
 
 /* ---- scroll reveal ---- */
