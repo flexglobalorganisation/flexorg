@@ -265,6 +265,11 @@
   .menu a:focus-visible{background:var(--paper)}
   .actions{align-items:flex-start;position:relative;z-index:20}
   @media (max-width:560px){.cal{width:100%}.cal>.btn{width:100%}.menu{left:0;right:0;min-width:0}}
+  .years{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+  .yr{min-height:44px;padding:8px 18px;border-radius:999px;border:2px solid var(--forest);background:transparent;color:var(--forest);font:700 .92rem var(--body);cursor:pointer;transition:background .2s,color .2s}
+  .yr[aria-pressed="true"]{background:var(--forest);color:var(--white)}
+  @media (hover:hover){.yr:hover{background:var(--forest);color:var(--white)}}
+  .card.arch[hidden]{display:none}
   .arch-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr));gap:clamp(16px,2.4vw,28px);margin-top:26px;align-items:start}
   .card.arch{padding:0;overflow:hidden}
   .card.arch img{width:100%;display:block;border-bottom:1px solid var(--line)}
@@ -483,6 +488,7 @@
     <div class="wrap">
       <h2 class="reveal">Previous programmes</h2>
       <p class="sub reveal" style="--d:.08s">Earlier FLEXConnect sessions. We are also gathering every FLEX programme since 2004, with the presentation files, and will add them here.</p>
+      <div class="years" id="archYears" role="group" aria-label="Filter previous programmes by year"></div>
       <div class="arch-grid" id="archGrid"></div>
     </div>
   </section>
@@ -520,6 +526,9 @@
      Each of the three shows as a button; empty ones appear greyed out.
    - hostPhoto / speakerPhoto: transparent-background portraits shown
      in the hero, e.g. "people/creech-jones.webp"
+   - ics: optional calendar file for the session, e.g.
+     "calendar/flexconnect-2026-10-25.ics" (most reliable for Apple
+     devices). If left out, the page builds the file itself.
    - flyer: path or link to the month's flyer image, e.g.
      "flyers/oct-2026.jpg" (upload the image next to this file).
      Leave "" to hide it.
@@ -552,6 +561,142 @@ const CONFIG = {
     }
   },
   sessions: [
+    {
+      start: "2020-10-18T18:00:00Z",
+      topic: "Mastering Emotional Intelligence",
+      speaker: "Alfred Smith Andam",
+      speakerRole: "Treasury Analyst, MTN Ghana",
+      flyer: "flyers/2020-10-18.jpg",
+      watch: "", listen: "", slides: ""
+    },
+    {
+      start: "2020-11-15T19:00:00Z",
+      topic: "Mastering Emotional Intelligence (Part II)",
+      host: "Dr. John Kissi",
+      hostRole: "Chartered Civil Engineer",
+      speaker: "Alfred Smith Andam",
+      speakerLabel: "Guest",
+      speakerRole: "Treasury Analyst, MTN Ghana",
+      flyer: "flyers/2020-11-15.jpg",
+      watch: "", listen: "", slides: ""
+    },
+    {
+      start: "2021-01-31T19:00:00Z",
+      topic: "Mastering the Art and Science of Setting & Achieving Great Goals",
+      speaker: "Dr. John Kissi",
+      speakerRole: "Chartered Civil Engineer, President of FLEX",
+      flyer: "flyers/2021-01-31.jpg",
+      watch: "", listen: "", slides: ""
+    },
+    {
+      start: "2021-03-07T19:00:00Z",
+      topic: "Conflict Resolution",
+      subtitle: "How to settle disputes and negotiate your way to success",
+      host: "Dr. John Kissi",
+      hostRole: "Chartered Civil Engineer, President of FLEX",
+      speaker: "Bennard Owusu",
+      speakerRole: "Lawyer, UK",
+      flyer: "flyers/2021-03-07.jpg",
+      watch: "", listen: "", slides: ""
+    },
+    {
+      start: "2022-02-20T19:00:00Z",
+      topic: "Vision: You Can’t Succeed Without One",
+      speaker: "Dr. John Kissi",
+      speakerRole: "Chartered Civil Engineer, President of FLEX",
+      flyer: "flyers/2022-02-20.jpg",
+      watch: "", listen: "", slides: ""
+    },
+    {
+      start: "2023-02-06T19:00:00Z",
+      topic: "New Year, New Beginnings",
+      host: "Dr. John Kissi",
+      hostRole: "Chartered Civil Engineer, FLEX President",
+      speaker: "Yaa Dankwa Ampadu-Sackey",
+      speakerRole: "Barrister, Ghana and UK",
+      flyer: "flyers/2023-02-06.jpg",
+      watch: "", listen: "", slides: ""
+    },
+    {
+      start: "2024-05-26T18:00:00Z",
+      topic: "Optimising Your Network for Optimum Wealth",
+      host: "Dr. John Kissi",
+      hostRole: "Chartered Engineer, President of FLEX",
+      speaker: "Carol Hartley",
+      speakerRole: "Management Consultant",
+      flyer: "flyers/2024-05-26.jpg",
+      watch: "", listen: "", slides: ""
+    },
+    {
+      start: "2025-02-23T19:00:00Z",
+      topic: "Leading with Love",
+      subtitle: "Crafting a life plan that elevates you and those around you",
+      host: "Dr. John Kissi",
+      hostRole: "Chartered Engineer, President of FLEX",
+      speaker: "Bridgette Baaba Nzima-Mensah (Mrs)",
+      speakerLabel: "Guest",
+      speakerRole: "Counselling Psychologist and Accredited Public Relations Officer",
+      flyer: "flyers/2025-02-23.jpg",
+      watch: "", listen: "", slides: ""
+    },
+    {
+      start: "2025-03-29T19:00:00Z",
+      topic: "Leading with Love (Part 2)",
+      subtitle: "Crafting a life plan that elevates you and those around you",
+      host: "Dr. John Kissi",
+      hostRole: "Chartered Engineer, President of FLEX",
+      speaker: "Bridgette Baaba Nzima-Mensah (Mrs)",
+      speakerLabel: "Guest",
+      speakerRole: "Counselling Psychologist and Accredited Public Relations Officer",
+      flyer: "flyers/2025-03-29.jpg",
+      watch: "", listen: "", slides: ""
+    },
+    {
+      start: "2025-04-27T18:00:00Z",
+      topic: "The Hidden Challenge of Depression",
+      subtitle: "Causes, consequences and management",
+      host: "Dr. John Kissi",
+      hostRole: "Chartered Engineer, President of FLEX",
+      speaker: "Eugene Kwarteng-Nantwi",
+      speakerLabel: "Guest",
+      speakerRole: "Senior Lecturer and Counselling Psychologist, UCC",
+      flyer: "flyers/2025-04-27.jpg",
+      watch: "", listen: "", slides: ""
+    },
+    {
+      start: "2025-09-28T18:00:00Z",
+      topic: "From Idea to Income: Launching Your Online Business with AI Agents",
+      host: "Dr. John Kissi",
+      hostRole: "Chartered Engineer, President of FLEX",
+      speaker: "Kofi Folson and Benjamin Godwyll",
+      speakerLabel: "Speakers",
+      speakerRole: "IT Specialists",
+      flyer: "flyers/2025-09-28.jpg",
+      watch: "", listen: "", slides: ""
+    },
+    {
+      start: "2025-11-30T19:00:00Z",
+      topic: "Developing the Right Mindset",
+      subtitle: "for personal success",
+      host: "Dr. John Kissi",
+      hostRole: "Chartered Engineer, President of FLEX",
+      speaker: "Oscar Bimpong",
+      speakerLabel: "Guest",
+      speakerRole: "Founder and CEO, Train2inspire Consultancy",
+      flyer: "flyers/2025-11-30.jpg",
+      watch: "", listen: "", slides: ""
+    },
+    {
+      start: "2026-02-22T19:00:00Z",
+      topic: "Building Consistency When Motivation Is Unreliable",
+      host: "Dr. John Kissi",
+      hostRole: "Chartered Engineer, President of FLEX",
+      speaker: "David Owusu-Yianoma",
+      speakerLabel: "Guest",
+      speakerRole: "Barrister, UK and Ghana",
+      flyer: "flyers/2026-02-22.jpg",
+      watch: "", listen: "", slides: ""
+    },
     {
       start: "2025-01-26T19:00:00Z",
       topic: "Overcoming Limiting Thoughts",
@@ -590,6 +735,7 @@ const CONFIG = {
     {
       start: "2026-10-25T18:00:00Z",   // 25 Oct 2026, 6PM GMT (time assumed, confirm)
       topic: "Preparing for What\u2019s Next Before it Arrives",
+      ics: "calendar/flexconnect-2026-10-25.ics",
       host: "Dr. John Kissi",
       hostRole: "Chartered Engineer, President of FLEX",
       speaker: "Mr. Creech Jones",
@@ -707,6 +853,7 @@ const grid = $('archGrid');
 archived.forEach((s,i)=>{
   const el = document.createElement('article');
   el.className = 'card arch reveal';
+  el.dataset.year = new Date(s.start).getUTCFullYear();
   el.style.setProperty('--d', (i%3*0.08)+'s');
   el.innerHTML =
     (s.flyer ? `<img loading="lazy" src="${esc(s.flyer)}" alt="Flyer for ${esc(s.topic || 'a previous session')}" onerror="this.remove()">` : '') +
@@ -716,7 +863,20 @@ archived.forEach((s,i)=>{
     `</div>`;
   grid.appendChild(el);
 });
-if(!archived.length) grid.style.display = 'none';
+if(!archived.length){ grid.style.display = 'none'; $('archYears').style.display = 'none'; }
+else {
+  const years = [...new Set(archived.map(s=>new Date(s.start).getUTCFullYear()))];
+  const bar = $('archYears');
+  const mk = (label,val) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'yr'; b.textContent = label; b.dataset.v = val; b.setAttribute('aria-pressed', val==='all' ? 'true' : 'false'); bar.appendChild(b); return b; };
+  if(years.length > 1){
+    mk('All','all'); years.forEach(y=>mk(String(y),String(y)));
+    bar.addEventListener('click', e=>{
+      const b = e.target.closest('.yr'); if(!b) return;
+      bar.querySelectorAll('.yr').forEach(x=>x.setAttribute('aria-pressed', String(x===b)));
+      grid.querySelectorAll('.card.arch').forEach(c=>{ c.hidden = !(b.dataset.v==='all' || c.dataset.year===b.dataset.v); });
+    });
+  } else { bar.style.display = 'none'; }
+}
 
 /* ---- next session ---- */
 const capsule = $('capsule');
@@ -878,7 +1038,9 @@ if(!next){
   document.addEventListener('click', e => { if(!$('cal').contains(e.target)) closeMenu(); });
   document.addEventListener('keydown', e => { if(e.key === 'Escape'){ closeMenu(); calBtn.focus(); } });
   calMenu.addEventListener('click', () => setTimeout(closeMenu, 150));
+  if(next.ics) $('calIcs').href = next.ics;   // a real .ics file on the site is the most reliable on iPhone and Mac
   $('calIcs').addEventListener('click', e => {
+    if(next.ics) return;                        // let the browser open the file normally
     e.preventDefault();
     const isIOS = /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
     if(isIOS){ location.href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(ics); return; }
