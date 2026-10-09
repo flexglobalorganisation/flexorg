@@ -6,6 +6,20 @@
 <meta name="theme-color" content="#1f4a1a">
 <title>FLEXConnect Series | Foundation for Leadership Excellence</title>
 <meta name="description" content="A monthly conversation on leadership, hosted by the Foundation for Leadership Excellence. Join the next FLEXConnect session live on Zoom.">
+<meta name="theme-color" content="#1f4a1a">
+<link rel="canonical" href="https://connect.flexglobal.org/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="FLEXConnect Series">
+<meta property="og:title" content="FLEXConnect Series | Foundation for Leadership Excellence">
+<meta property="og:description" content="A monthly leadership conversation, live on Zoom and streamed on Spotify and YouTube. See the next session and browse past programmes.">
+<meta property="og:url" content="https://connect.flexglobal.org/">
+<meta property="og:image" content="https://connect.flexglobal.org/og-image.jpg">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="FLEXConnect Series | Foundation for Leadership Excellence">
+<meta name="twitter:description" content="A monthly leadership conversation, live on Zoom and streamed on Spotify and YouTube.">
+<meta name="twitter:image" content="https://connect.flexglobal.org/og-image.jpg">
+<link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -197,6 +211,10 @@
   .who{display:grid;gap:12px;margin-bottom:24px}
   .who div{padding-left:14px;border-left:4px solid var(--lime);font-weight:600}
   .who small{display:block;color:var(--muted);font-weight:400}
+  a.pl{color:inherit;text-decoration:underline;text-decoration-color:var(--lime);text-decoration-thickness:2px;text-underline-offset:3px;transition:text-decoration-color .2s,color .2s}
+  a.pl::after{content:"\2197";font-size:.78em;margin-left:3px;opacity:.7}
+  @media (hover:hover){a.pl:hover{text-decoration-color:var(--leaf);color:var(--leaf)}}
+  .capsule a.pl:hover,.card.dark a.pl:hover{color:var(--lime)}
   #thismonth[hidden]{display:none}
   .session figure.float{animation:bob 6s ease-in-out infinite}
   @keyframes bob{50%{transform:translateY(-10px)}}
@@ -205,6 +223,9 @@
   .card .group-label:first-of-type{margin-top:0}
   .wip{display:inline-flex;align-items:center;gap:8px;margin-bottom:12px;padding:6px 14px;border-radius:999px;background:#eef3e4;color:var(--forest);font-weight:700;font-size:.85rem}
   .wip::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--lime);border:2px solid var(--forest);animation:glow 2s infinite}
+  .flinks{width:100%;display:flex;flex-wrap:wrap;gap:6px 22px}
+  .flinks a{color:var(--lime);font-weight:600;text-decoration:none;padding:8px 0;display:inline-block}
+  .flinks a:hover{text-decoration:underline}
   footer .fnote{width:100%;opacity:.85;font-size:.9rem}
   .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
   .zoomcard{position:relative;overflow:hidden;display:flex;flex-direction:column;color:var(--white);border-color:transparent;background:linear-gradient(150deg,var(--forest),var(--deep))}
@@ -303,6 +324,7 @@
     .progress small{display:none}
   }
   @media (max-width:520px){ header.site nav a.hide-sm{display:none} }
+  header.site nav{align-items:center}
   @media (max-width:560px){
     .actions{flex-direction:column}
     .actions .btn{width:100%}
@@ -508,6 +530,7 @@
   <div class="wrap">
     <div><strong>Foundation for Leadership Excellence</strong><br>Sharing Knowledge, Inspiring People</div>
     <div>flexglobal.org</div>
+    <nav class="flinks" aria-label="Legal"><a href="privacy.html">Privacy and Cookie Policy</a><a href="#" data-cookie-settings>Cookie settings</a><a href="#follow">Follow FLEX</a></nav>
     <div class="fnote">Our full website is a work in progress. Thank you for your patience.</div>
   </div>
 </footer>
@@ -524,6 +547,7 @@
    - slides: the presentation file, e.g. "presentations/2026-09-06.pdf"
      (upload it to a "presentations" folder). A Google Drive link works too.
      Each of the three shows as a button; empty ones appear greyed out.
+   - speakerUrl: optional link to the speaker's page; makes their name a link
    - hostPhoto / speakerPhoto: transparent-background portraits shown
      in the hero, e.g. "people/creech-jones.webp"
    - ics: optional calendar file for the session, e.g.
@@ -738,8 +762,9 @@ const CONFIG = {
       ics: "calendar/flexconnect-2026-10-25.ics",
       host: "Dr. John Kissi",
       hostRole: "Chartered Engineer, President of FLEX",
-      speaker: "Mr. Creech Jones",
-      speakerRole: "CEO, Rickair Company Ltd",
+      speaker: "Mr. Philip Creech-Jones",
+      speakerRole: "CEO, Rikair Company Ltd",
+      speakerUrl: "https://www.rikair.com/team/philip-creech-jones",
       speakerPhoto: "people/creech-jones.webp",
       flyer: ""
     }
@@ -808,10 +833,11 @@ renderLinks($('clips'), CONFIG.links.clips);
 if(!$('clips').children.length) $('follow').style.display = 'none';
 
 /* ---- people helper ---- */
+const nameLink = (n,u) => u ? `<a class="pl" href="${esc(u)}" target="_blank" rel="noopener">${esc(n)}</a>` : esc(n);
 function whoHtml(s){
   const out = [];
   if(s.host) out.push(`<div>${esc(s.host)}<small>Host${s.hostRole ? '. ' + esc(s.hostRole) : ''}</small></div>`);
-  if(s.speaker) out.push(`<div>${esc(s.speaker)}<small>${esc(s.speakerLabel || 'Speaker')}${s.speakerRole ? '. ' + esc(s.speakerRole) : ''}</small></div>`);
+  if(s.speaker) out.push(`<div>${nameLink(s.speaker,s.speakerUrl)}<small>${esc(s.speakerLabel || 'Speaker')}${s.speakerRole ? '. ' + esc(s.speakerRole) : ''}</small></div>`);
   return out.join('');
 }
 
@@ -894,7 +920,7 @@ if(!next){
   const tzMine = Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
   $('when').textContent = fmtLong(start, tzMine);
   $('topic').innerHTML = next.topic
-    ? `<b>${esc(next.topic)}</b>${next.speaker ? ' with ' + esc(next.speaker) : ''}`
+    ? `<b>${esc(next.topic)}</b>${next.speaker ? ' with ' + nameLink(next.speaker,next.speakerUrl) : ''}`
     : 'Topic and speaker will be announced soon.';
 
   /* this month's block, shown once a topic or flyer is set */
@@ -914,9 +940,9 @@ if(!next){
     $('stageWrap').hidden = false;
     if(hostPhoto){ $('hostImg').src = hostPhoto; $('hostImg').alt = 'Portrait of ' + (next.host || 'the host'); } else { $('hostImg').remove(); }
     if(guestPhoto){ $('guestImg').src = guestPhoto; $('guestImg').alt = 'Portrait of ' + (next.speaker || 'the speaker'); } else { $('guestImg').remove(); $('stage').classList.add('solo'); }
-    const chip = (id, tag, name, role) => { if(!name) return; const el = $(id); el.innerHTML = `<span class="tag">${esc(tag)}</span>${esc(name)}${role ? `<small>${esc(role)}</small>` : ''}`; el.hidden = false; };
+    const chip = (id, tag, name, role, url) => { if(!name) return; const el = $(id); el.innerHTML = `<span class="tag">${esc(tag)}</span>${nameLink(name,url)}${role ? `<small>${esc(role)}</small>` : ''}`; el.hidden = false; };
     chip('hostChip','Host',next.host,next.hostRole);
-    chip('guestChip',next.speakerLabel || 'Speaker',next.speaker,next.speakerRole);
+    chip('guestChip',next.speakerLabel || 'Speaker',next.speaker,next.speakerRole,next.speakerUrl);
   }
 
   /* countdown, with a small drop animation when a digit changes */
@@ -1014,6 +1040,16 @@ if(!next){
     'END:VEVENT','END:VCALENDAR'
   ].map(fold).join('\r\n') + '\r\n';
 
+  /* search-engine event data */
+  try{
+    const ld = {'@context':'https://schema.org','@type':'Event',name:title,startDate:start.toISOString(),endDate:end.toISOString(),
+      eventStatus:'https://schema.org/EventScheduled',eventAttendanceMode:'https://schema.org/OnlineEventAttendanceMode',isAccessibleForFree:true,
+      location:{'@type':'VirtualLocation',url:'https://connect.flexglobal.org/'},image:['https://connect.flexglobal.org/og-image.jpg'],
+      description:'A monthly leadership conversation on Zoom, hosted by the Foundation for Leadership Excellence.',
+      organizer:{'@type':'Organization',name:'Foundation for Leadership Excellence',url:'https://flexglobal.org'}};
+    if(next.speaker) ld.performer = Object.assign({'@type':'Person',name:next.speaker}, next.speakerUrl ? {url:next.speakerUrl} : {});
+    const sc = document.createElement('script'); sc.type = 'application/ld+json'; sc.textContent = JSON.stringify(ld); document.head.appendChild(sc);
+  }catch(e){}
   $('calGoogle').href = 'https://calendar.google.com/calendar/render?action=TEMPLATE'
     + `&text=${encodeURIComponent(title)}`
     + `&dates=${stamp(start)}/${stamp(end)}`
@@ -1073,5 +1109,11 @@ if(!reduce && matchMedia('(hover:hover) and (pointer:fine)').matches){
   });
 }
 </script>
+
+<!-- Cookie consent. Edit the settings below. -->
+<script>
+  window.FLEX_CONSENT = { theme: 'green', policyUrl: 'privacy.html', analyticsId: '' };   // analyticsId: e.g. 'G-XXXXXXXXXX' (leave empty for no analytics)
+</script>
+<script src="consent.js" defer></script>
 </body>
 </html>
